@@ -5,13 +5,12 @@ import { useNavigate } from "react-router-dom";
 import ProgressBar from "../Component/ProgressBar";
 import TabBar from "../Component/TabBar";
 import TaskCard from "../Component/TaskCard";
-import { State } from "../Redux/types";
+import { State } from "../redux/types";
 import "./Pages.scss";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const  habit = useSelector((state: State) =>( state.habit));
-  console.log(habit);
+  const data = useSelector((state: State) => state.habitData )
   return (
     <div className="home-page flex justify-end items-center px-3 md:pr-[20%] ">
       <div className="mobile-design relative">
@@ -40,15 +39,16 @@ export default function HomePage() {
 
             <div className="overflow-y-scroll max-h-[170px] mt-2">
              
-            {
-              habit?.map((e) => (
+            {/* {
+               data.habit?.map((e) => (
                 <TaskCard
                 color="#867CB5"
                 habitTitle={e?.title}
                 habitDescription={e?.description}
+                id={e?.id}
               />
               ))
-            }
+            } */}
             
             </div>
             <div className="fixed bottom-0 w-full tab-bar -mx-4">

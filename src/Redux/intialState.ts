@@ -1,6 +1,6 @@
-import { State } from './types';
-
+import { State } from "./types";
 export const initialState: State = {
-    habit:[],
-    habitStatus: [],
-}
+
+  habitData:[],
+  
+};

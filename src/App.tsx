@@ -10,7 +10,7 @@ function App() {
         <Route path="/" element={<Navigate to="/habit-tracker" replace/>} />
       <Route path="/habit-tracker" element={<HomePage />}/>
       <Route path="/add-new" element={<AddNew />}/>
-      <Route path="/history" element={<HistoryPage/>}/>
+      <Route path="/history/:id" element={<HistoryPage/>}/>
       </Routes>
     </BrowserRouter>
   );

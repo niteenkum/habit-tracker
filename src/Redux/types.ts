@@ -1,21 +1,19 @@
+//Main State for redux
 export interface State {
-    habit: IHabit[];
-    habitStatus: IHabitStatus[];
+  habitData: IHabit[];
 }
+
 
 export interface IHabit {
-    title: string;
-    description: string;
-    startDay: string;
-    id: number;
+  title: string;
+  description: string;
+  id: number;
+  day: IDay[];
 }
 
-export interface IHabitStatus{
-    id: number;
-    days: IDay;
-}
+
 
 export interface IDay {
-    day: string;
-    status: "done" | "not-done" | "none";
+  day: string;
+  status: "done" | "not-done" | "none";
 }

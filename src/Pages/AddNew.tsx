@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateHabitSlice } from "../redux/reducers/updateHabit";
 import TabBar from "../Component/TabBar";
-import { habitSlice } from "../Redux/Reducers/habitSlice";
-import { State } from "../Redux/types";
+import { State } from "../redux/types";
 
 export default function AddNew() {
+  const dispatch = useDispatch();
   const add_new_card = require("../Assests/add-new-habit-card.png");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -13,12 +14,7 @@ export default function AddNew() {
   const day: string = event
     .toLocaleTimeString(undefined, options)
     .split(" ")[0];
-
-  const dispatch = useDispatch();
-  const  habit  = useSelector((state: State) => state.habit);
-  useEffect(() => {
-    // console.log("Habit inside add newww",habit[0]?.description)
-  }, [ habit])
+  const data  = useSelector((state: State) => state.habitData);
   return (
     <div className="home-page flex justify-end items-center px-3 md:pr-[20%] ">
       <div className="mobile-design ">
@@ -32,21 +28,15 @@ export default function AddNew() {
             action=""
             onSubmit={(e) => {
               e.preventDefault();
-              dispatch(
-                habitSlice.actions.updateHabit({
-                  title,
-                  description,
-                  startDay: day,
-                  id: habit?.length + 1,
-                })
-              );
-              dispatch(
-                habitSlice.actions.updateHabitStatus({
-                  id: habit?.length + 1,
-                  days: { day: day, status: "none" },
-                })
-              );
               console.log(title, description, day);
+              dispatch(
+                updateHabitSlice.actions.updateHabitData({
+                  title: title,
+                  description: description,
+                  id: 1,
+                  day: [{day: day, status: "none"}],
+                })
+              );
             }}
           >
             <div className="mt-4">
