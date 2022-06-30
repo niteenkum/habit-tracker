@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import AddNew from "./Pages/AddNew";
+import AllHistoryPage from "./Pages/AllHistory";
 import HistoryPage from "./Pages/HistoryPage";
 import HomePage from "./Pages/HomePage";
 
@@ -11,6 +12,7 @@ function App() {
       <Route path="/habit-tracker" element={<HomePage />}/>
       <Route path="/add-new" element={<AddNew />}/>
       <Route path="/history/:id" element={<HistoryPage/>}/>
+      <Route path="/all-history" element={<AllHistoryPage/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,14 +3,16 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import HabitHistoryCard from "../Component/HabitHistoryCard";
 import TabBar from "../Component/TabBar";
+import Task from "../Component/Task";
 import { RootState } from "../Redux/store";
 // import { State } from "../redux/types";
 
-export default function HistoryPage() {
+export default function AllHistoryPage() {
   const history_habit_card = require("../Assests/history-habit-card.png");
   const {id} = useParams()
   // const data = useSelector((state: State) => state.habitData.habit.filter((e) => (e.id === Number(id))));
   const data: any  = useSelector((state: RootState) => state.updateHabit);
+  const {updateHabit } = useSelector((state: RootState) => state);
 
   useEffect(() => {
     console.log(data);
@@ -23,8 +25,7 @@ export default function HistoryPage() {
           <img src={history_habit_card} alt="History Habit Card" className="h-40 w-full" />
 
           {/* <div className="text-xl font-normal">{data[0].title}</div> */}
-          <div className="text-black text-xl py-2 font-bold">{ data[Number(id) - 1]?.title}</div>
-          <div className="history-card  max-h-[40vh] overflow-y-scroll">
+          <div className="history-card  max-h-[44vh] overflow-y-scroll">
              {
               data[Number(id) - 1]?.day?.map( (e: any, index: number) => (
                 <HabitHistoryCard
@@ -32,10 +33,20 @@ export default function HistoryPage() {
                 habitStatus={e.status}
                 index={index}
                 key={index}
-                id={Number(id)}
+                id={Number(id)-1}
                 />
               ) )
              }
+             {
+              updateHabit?.map((e: any, index) => (
+                <Task
+                habitTitle={e?.title}
+                habitDescription={e?.description}
+                id={e?.id}
+                key={index}
+                />
+              ))
+            }
 
           </div>
         </div>

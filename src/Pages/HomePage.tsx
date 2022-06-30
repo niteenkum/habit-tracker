@@ -1,16 +1,75 @@
+import { useEffect, useState } from "react";
 import { AiFillHome, AiOutlineHistory } from "react-icons/ai";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../Component/ProgressBar";
 import TabBar from "../Component/TabBar";
 import TaskCard from "../Component/TaskCard";
-import { State } from "../redux/types";
+import { RootState } from "../Redux/store";
+import { addDay } from "../Redux/updateHabitSlice";
 import "./Pages.scss";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const data = useSelector((state: State) => state.habitData )
+  const {updateHabit } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
+  const todayDate = new Date().toLocaleDateString();
+  const event = new Date();
+  const options: any = { weekday: "long" };
+  const day: string = event
+  .toLocaleTimeString(undefined, options)
+  .split(" ")[0];
+  const [pendingTask, setPendingTask] = useState<number>(0);
+  const [today, setToday] = useState<string>("")
+
+  useEffect(() => {
+    const date = localStorage.getItem("date");
+
+    if(date){
+      if(date.split('/')[1] !== todayDate.split('/')[1]){
+        console.log(date.split('/')[1], todayDate.split('/')[1]);
+          localStorage.setItem("date", JSON.stringify(todayDate));
+          dispatch(
+            addDay(
+             {
+                day: day,
+                status: "none"
+             }
+            )
+          )
+      }else{
+        console.log(date.split('/')[1], todayDate.split('/')[1]);
+      }
+    }else{
+      localStorage.setItem("date", JSON.stringify(todayDate));
+      dispatch(
+        addDay(
+         {
+            day: day,
+            status: "none"
+         }
+        )
+      )
+    }
+  }, []);
+
+  useEffect(() => {
+    setPendingTask(0);
+    let pendingTasks = 0;
+    updateHabit?.map((e: any, index) => {
+    if(e?.day[e.day.length - 1].status === "none"){
+      pendingTasks++
+    }
+    setToday(e?.day[e.day.length - 1].day)  
+    }
+    )
+    setPendingTask(pendingTasks)
+    
+  }, [updateHabit])
+
+
+
   return (
     <div className="home-page flex justify-end items-center px-3 md:pr-[20%] ">
       <div className="mobile-design relative">
@@ -18,7 +77,7 @@ export default function HomePage() {
         <div className="card-for-pending-tasks m-5">
           <div className="text-xl  font-normal text-white p-3 mt-2 w-1/2 ">
             {" "}
-            Hey, you have 3 Pending Task for today.
+            Hey, you have {pendingTask} Pending Task for {today}.
           </div>
         </div>
 
@@ -29,26 +88,27 @@ export default function HomePage() {
             {/* Progess Bar Status of task visually and written format */}
             <div className="mt-4">
               <div className="text-xs text-black font-normal pb-3 flex justify-between items-center">
-                <span>3 Task Remaining</span> <span>2/4 (50%)</span>
+                <span>{pendingTask} Task Remaining</span> <span>{updateHabit.length - pendingTask}{" / "}{updateHabit.length} ({ 100 - Math.round((pendingTask/updateHabit.length)*100)}){"%"}</span>
               </div>
-              <ProgressBar percentage={"40%"} />{" "}
+              <ProgressBar percentage={ (100 - (pendingTask/updateHabit.length)*100) + "%"} />{" "}
               <div className="border-t mt-8"></div>
             </div>
 
             {/* All todays habit to show */}
 
             <div className="overflow-y-scroll max-h-[170px] mt-2">
-             
-            {/* {
-               data.habit?.map((e) => (
+            {
+              updateHabit?.map((e: any, index) => (
                 <TaskCard
-                color="#867CB5"
                 habitTitle={e?.title}
                 habitDescription={e?.description}
                 id={e?.id}
-              />
+                key={index}
+                habitStatus={e.day[e.day.length - 1].status}
+                index={e.day.length - 1}
+                />
               ))
-            } */}
+            }
             
             </div>
             <div className="fixed bottom-0 w-full tab-bar -mx-4">
@@ -62,7 +122,7 @@ export default function HomePage() {
               />
               <AiOutlineHistory
                 className="text-blue-400 text-3xl cursor-pointer"
-                onClick={() => navigate("/history")}
+                onClick={() => navigate("/all-history")}
               />
             </div>
           </div>

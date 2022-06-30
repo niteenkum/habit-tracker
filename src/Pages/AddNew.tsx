@@ -1,20 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHabitSlice } from "../redux/reducers/updateHabit";
 import TabBar from "../Component/TabBar";
-import { State } from "../redux/types";
+import type { RootState } from '../Redux/store';
+import { addHabit } from "../Redux/updateHabitSlice";
+
 
 export default function AddNew() {
   const dispatch = useDispatch();
+  
+  const {updateHabit } = useSelector((state: RootState) => state);
   const add_new_card = require("../Assests/add-new-habit-card.png");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+  const event = new Date();
   const options: any = { weekday: "long" };
   const day: string = event
     .toLocaleTimeString(undefined, options)
     .split(" ")[0];
-  const data  = useSelector((state: State) => state.habitData);
+
+    function handleSubmit(){
+          dispatch(
+                addHabit(
+                  {
+                    title: title,
+                    description: description,
+                    id: updateHabit.length + 1,
+                    day: [{
+                      day: day,
+                      status: "none"
+                    }]
+                  }
+                )
+                )
+                console.log(updateHabit)
+    }
+
   return (
     <div className="home-page flex justify-end items-center px-3 md:pr-[20%] ">
       <div className="mobile-design ">
@@ -28,15 +48,7 @@ export default function AddNew() {
             action=""
             onSubmit={(e) => {
               e.preventDefault();
-              console.log(title, description, day);
-              dispatch(
-                updateHabitSlice.actions.updateHabitData({
-                  title: title,
-                  description: description,
-                  id: 1,
-                  day: [{day: day, status: "none"}],
-                })
-              );
+            handleSubmit();
             }}
           >
             <div className="mt-4">

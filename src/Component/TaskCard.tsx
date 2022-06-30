@@ -1,32 +1,83 @@
 import { FiCheckCircle } from "react-icons/fi/index";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { AiOutlineMinusCircle } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { State } from "../redux/types";
+import { updateDayStatus } from "../Redux/updateHabitSlice";
+// import { State } from "../redux/types";
 
 interface IProps {
-  color: string;
   habitTitle: string;
   habitDescription: string;
   id: number;
+  habitStatus: string;
+  index: number
 }
 
 export default function TaskCard({
-  color,
   habitTitle,
   habitDescription,
   id,
+  habitStatus,
+  index
 }: IProps) {
-  const style = {
-    color: color,
-  };
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
-    <div className="flex items-center gap-5 mt-2 cursor-pointer hover:bg-slate-100" onClick={() => {navigate(`/history/${id}`)}}>
+    <div
+      className="flex items-center gap-5 mt-2 shadow-md"
+      // onClick={() => {
+      //   navigate(`/history/${id}`);
+      // }}
+    >
       <div className="flex ">
         {" "}
-        <FiCheckCircle className="text-2xl" style={style} />
-        <IoMdCloseCircleOutline className="text-2xl ml-2" style={style} />
+        <FiCheckCircle
+          className={`text-2xl cursor-pointer ${
+            habitStatus === "done" ? "text-[#867CB5]" : "text-slate-300"
+          }`}
+          onClick={() => {
+            dispatch(
+              updateDayStatus({
+                id: id,
+                index: index,
+                status: "done",
+              })
+              )
+          }
+          }
+        />
+        <IoMdCloseCircleOutline
+          className={`text-2xl ml-2 cursor-pointer ${
+            habitStatus === "not-done" ? "text-[#867CB5]" : "text-slate-300"
+          }`}
+          onClick={() => {
+            dispatch(
+              updateDayStatus({
+                id: id,
+                index: index,
+                status: "not-done",
+              })
+              )
+          }
+          }
+        />
+        <AiOutlineMinusCircle
+          className={`text-2xl ml-2 cursor-pointer ${
+            habitStatus === "none" ? "text-[#867CB5]" : "text-slate-300"
+          }`}
+          onClick={() => {
+            dispatch(
+              updateDayStatus({
+                id: id,
+                index: index,
+                status: "none",
+              })
+              )
+          }
+          }
+        />
       </div>
 
       <div className="flex flex-col">

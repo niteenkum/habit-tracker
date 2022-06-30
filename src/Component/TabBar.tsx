@@ -8,7 +8,7 @@ export default function TabBar() {
     <div className='tab-bar'>
       <AiFillHome className="text-blue-400 text-3xl cursor-pointer"  onClick={() => navigate("/")}/>
      < BsFillPlusCircleFill className="text-blue-400 text-5xl -mt-6 cursor-pointer" onClick={() => navigate("/add-new")} />
-      <AiOutlineHistory className="text-blue-400 text-3xl cursor-pointer" onClick={() => navigate("/history")}/>
+      <AiOutlineHistory className="text-blue-400 text-3xl cursor-pointer" onClick={() => navigate("/all-history")}/>
     </div>
   )
 }

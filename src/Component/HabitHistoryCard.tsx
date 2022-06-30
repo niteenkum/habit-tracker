@@ -2,9 +2,10 @@ import "./Component.scss";
 import { BsHandThumbsUpFill, BsHandThumbsDownFill } from "react-icons/bs";
 import { GrSubtractCircle } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import { State } from "../redux/types";
+// import { State } from "../redux/types";
 import { title } from "process";
-import { updateHabitSlice } from "../redux/reducers/updateHabit";
+import { updateDayStatus } from "../Redux/updateHabitSlice";
+// import { updateHabitSlice } from "../redux/reducers/updateHabit";
 interface IProps {
   day: string;
   habitStatus: "done" | "not-done" | "none";
@@ -31,24 +32,13 @@ export default function HabitHistoryCard({
             habitStatus === "done" ? "active text-green-500" : "text-slate-200"
           } cursor-pointer`}
           onClick={() => {
-          //   dispatch(
-          //   //   {
-          //   //   type: "CHANGE_HABIT_STATUS",
-          //   //   payload: {
-          //   //     id: id,
-          //   //     index: index,
-          //   //     status: "done",
-          //   //   },
-          //   // }
-
-          //   updateHabitSlice.actions.updateDayStatus({
-          //     id: id,
-          //     index: index,
-          //     status: "done",
-          //   })
-          //   );
-         
-          console.log("")
+          dispatch(
+            updateDayStatus({
+              id: id,
+              index: index,
+              status: "done",
+            })
+            )
         }
          }
         >
@@ -61,6 +51,16 @@ export default function HabitHistoryCard({
               ? "active text-red-500"
               : "text-slate-200"
           } cursor-pointer`}
+          onClick={() => {
+            dispatch(
+              updateDayStatus({
+                id: id,
+                index: index,
+                status: "not-done",
+              })
+              )
+          }
+           }
         >
           <BsHandThumbsDownFill />
         </div>
@@ -68,6 +68,16 @@ export default function HabitHistoryCard({
           className={`status  text-xl ${
             habitStatus === "none" ? "active text-slate-500" : " text-slate-200"
           } cursor-pointer`}
+          onClick={() => {
+            dispatch(
+              updateDayStatus({
+                id: id,
+                index: index,
+                status: "none",
+              })
+              )
+          }
+           }
         >
           {" "}
           <GrSubtractCircle />{" "}
