@@ -16,10 +16,10 @@ such as none, done, not-done. By default status of any habit is set be not-done.
 You can update the status of habit by click on icon.
 
 #### Adding New Habit Task
-By Click on + (plus) button inside tabbar.
+By Clicking on + (plus) button inside tabbar.
 ![App Screenshot](https://snipboard.io/zHovE8.jpg)
 
-Enter the title of the habit and description for the habit. Once the habit added you will be Habit Page. 
+Enter the title of the habit and description for the habit. Once the habit added you will be redirected to Habit Page. 
 Where all the list of Habits will be displayed.
 
 #### View All The Habits
