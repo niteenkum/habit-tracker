@@ -72,8 +72,8 @@ Start the server
 Contain all the components used in Project.
 
 #### Pages
-Contain All the pages used in project like Todo List which is homepage,
-todo update page, add new todo page.
+Contain All the pages used in project like Today Habits List which is homepage,
+ update page, add new habit page.
 
 #### Hooks
 
