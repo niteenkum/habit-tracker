@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import TabBar from "../Component/TabBar";
 import type { RootState } from '../Redux/store';
 import { addHabit } from "../Redux/updateHabitSlice";
@@ -7,6 +8,7 @@ import { addHabit } from "../Redux/updateHabitSlice";
 
 export default function AddNew() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const {updateHabit } = useSelector((state: RootState) => state);
   const add_new_card = require("../Assests/add-new-habit-card.png");
@@ -49,6 +51,7 @@ export default function AddNew() {
             onSubmit={(e) => {
               e.preventDefault();
             handleSubmit();
+            navigate("/all-history")
             }}
           >
             <div className="mt-4">
