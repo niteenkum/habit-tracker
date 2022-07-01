@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/habit-tracker/static/css/main.07a731b0.css",
+    "main.css": "/habit-tracker/static/css/main.9427f072.css",
     "main.js": "/habit-tracker/static/js/main.522c2eb4.js",
     "static/js/787.67c82cec.chunk.js": "/habit-tracker/static/js/787.67c82cec.chunk.js",
-    "static/media/home-page.png": "/habit-tracker/static/media/home-page.c0532683ed5fab8a358d.png",
     "static/media/add-new-habit-card.png": "/habit-tracker/static/media/add-new-habit-card.19ae8fb7a4148e5a184e.png",
+    "static/media/home-page.png": "/habit-tracker/static/media/home-page.2bd1fd989ec84c80ffbd.png",
     "static/media/history-habit-card.png": "/habit-tracker/static/media/history-habit-card.33cffaa9a6ab2825ee70.png",
     "static/media/home-page-habbit-card.png": "/habit-tracker/static/media/home-page-habbit-card.3c6151221a2a6df12376.png",
     "static/media/progress-bg.png": "/habit-tracker/static/media/progress-bg.f5089cc4b6a46ad6c5f0.png",
     "index.html": "/habit-tracker/index.html",
-    "main.07a731b0.css.map": "/habit-tracker/static/css/main.07a731b0.css.map",
+    "main.9427f072.css.map": "/habit-tracker/static/css/main.9427f072.css.map",
     "main.522c2eb4.js.map": "/habit-tracker/static/js/main.522c2eb4.js.map",
     "787.67c82cec.chunk.js.map": "/habit-tracker/static/js/787.67c82cec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.07a731b0.css",
+    "static/css/main.9427f072.css",
     "static/js/main.522c2eb4.js"
   ]
 }
