@@ -21,6 +21,7 @@ export default function AddNew() {
     .split(" ")[0];
 
     function handleSubmit(){
+      // By default status of adding new habit is set to be none which basically means that user has not selected any status for that day.
           dispatch(
                 addHabit(
                   {
@@ -38,6 +39,7 @@ export default function AddNew() {
     }
 
   return (
+    // This page Display the form to add new habit
     <div className="home-page flex justify-end items-center px-3 md:pr-[20%] ">
       <div className="mobile-design ">
         <div className="p-5">
@@ -46,6 +48,7 @@ export default function AddNew() {
           <div className="text-xl font-bold">Start Your New Habit</div>
 
           <img src={add_new_card} className="h-40 mt-4" alt="Add New Card" />
+          {/*  This for take input as title and description and on submit it will add it to store. */}
           <form
             action=""
             onSubmit={(e) => {
@@ -79,6 +82,7 @@ export default function AddNew() {
             </div>
 
             <div className="flex justify-center mt-4">
+              {/* This button will be disable till the title and description will is filled */}
               <button
                 type="submit"
                 className={`h-12 w-1/2 bg-blue-500 rounded-xl text-white ${

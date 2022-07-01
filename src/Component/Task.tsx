@@ -12,15 +12,16 @@ interface IProps {
   id: number;
 }
 
+// This components take the props as IProps and display the habit.
 export default function Task({
   habitTitle,
   habitDescription,
   id,
 }: IProps) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   return (
+    // It only shows the habit title and description and clicking on that habit it will redirect to the habit page where you can view the history of that particular habit.
     <div
       className="flex items-center gap-5 mt-2 hover:bg-slate-300 hover:border p-2 cursor-pointer"
       onClick={() => {

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import updateHabitReducer from "../Redux/updateHabitSlice"
 
 export const store = configureStore({
+  // This the habit reducer which is used to update all the habits and days status.
   reducer: {
     updateHabit: updateHabitReducer
   },

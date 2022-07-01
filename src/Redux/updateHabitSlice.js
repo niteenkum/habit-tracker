@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Create the habit slice
 
 export const updateHabitSlice = createSlice({
   name: 'updateHabit',
+  // The initial state of the habit slice which contains the  three habits by default.
   initialState: [
     {
       title:"Exercise",
@@ -63,16 +65,18 @@ export const updateHabitSlice = createSlice({
     }
   ],
   reducers: {
+    // The reducer function for the habit slice which take habit title, description and day array in hich day and status of that day.
     addHabit: (state, action) => {
       state.push(action.payload);
     },
+
+    // The updatedaystatus function for the habit slice which take index and id and status for updating the particular day status of the habit.
     updateDayStatus: (state, action) => {
-      console.log(action?.payload?.id )
      state[action?.payload?.id -1 ].day[action?.payload?.index].status = action?.payload?.status;
     },
-    addDay: (state, action) => {
-      // state?.day?.push(action?.payload);
 
+    // The addDay function for the habit slice which take index and id and status for adding the day to the habit if the length of the habit is 7 its shift the array and push the new day to the array.
+    addDay: (state, action) => {
       state.map((habit) => {
         if(habit.day.length === 7){
           habit.day.shift();

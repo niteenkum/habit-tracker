@@ -2,10 +2,7 @@ import "./Component.scss";
 import { BsHandThumbsUpFill, BsHandThumbsDownFill } from "react-icons/bs";
 import { GrSubtractCircle } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-// import { State } from "../redux/types";
-import { title } from "process";
 import { updateDayStatus } from "../Redux/updateHabitSlice";
-// import { updateHabitSlice } from "../redux/reducers/updateHabit";
 interface IProps {
   day: string;
   habitStatus: "done" | "not-done" | "none";
@@ -13,20 +10,20 @@ interface IProps {
   id: number;
   index: number;
 }
-
+//  This components take the props as IProps and display the habit History card.
 export default function HabitHistoryCard({
   day,
   habitStatus,
   id,
   index,
 }: IProps) {
-  // const data = useSelector((state: State) => state.habitData.habit[0].day.filter((e) => (e.day === day)));
   const dispatch = useDispatch();
 
   return (
     <div className="day-history mr-2">
       <span>{day}</span>
       <div className="flex justify-between">
+        {/* BsHandThumbsUpFill  icon will change the status to be done */}
         <div
           className={`status mr-2  text-xl ${
             habitStatus === "done" ? "active text-green-500" : "text-slate-200"
@@ -45,6 +42,8 @@ export default function HabitHistoryCard({
           {" "}
           <BsHandThumbsUpFill />
         </div>
+
+        {/* BsHandThumbsDownFill  icon will change the status to be not-done */}
         <div
           className={`status mr-2  text-xl ${
             habitStatus === "not-done"
@@ -64,6 +63,8 @@ export default function HabitHistoryCard({
         >
           <BsHandThumbsDownFill />
         </div>
+                {/* GrSubtractCircle  icon will change the status to be none */}
+
         <div
           className={`status  text-xl ${
             habitStatus === "none" ? "active text-slate-500" : " text-slate-200"

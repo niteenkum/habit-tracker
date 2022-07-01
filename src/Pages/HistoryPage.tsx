@@ -8,14 +8,12 @@ import { RootState } from "../Redux/store";
 
 export default function HistoryPage() {
   const history_habit_card = require("../Assests/history-habit-card.png");
-  const {id} = useParams()
-  // const data = useSelector((state: State) => state.habitData.habit.filter((e) => (e.id === Number(id))));
+  const {id} = useParams();
   const data: any  = useSelector((state: RootState) => state.updateHabit);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data])
   return (
+
+    // This page Display particular habit history and status of habit days wise.
     <div className="home-page flex justify-end items-center px-3 md:pr-[20%] ">
       <div className="mobile-design ">
         
@@ -25,6 +23,7 @@ export default function HistoryPage() {
           {/* <div className="text-xl font-normal">{data[0].title}</div> */}
           <div className="text-black text-xl py-2 font-bold">{ data[Number(id) - 1]?.title}</div>
           <div className="history-card  max-h-[40vh] overflow-y-scroll">
+            {/* Using map to iterate and to render all the days with status */}
              {
               data[Number(id) - 1]?.day?.map( (e: any, index: number) => (
                 <HabitHistoryCard
@@ -40,6 +39,7 @@ export default function HistoryPage() {
           </div>
         </div>
         <div className="fixed bottom-0 w-full ">
+          {/* This is the component used for navigating to, homepage, add new page and habits page. */}
           <TabBar />
         </div>
       </div>
